@@ -4,27 +4,27 @@ resource "aws_key_pair" "ipraxa" {
   
 }
 
-resource "aws_instance" "PublicEC2" {
+resource "aws_instance" "PublicEC3" {
     ami = "${var.ami}"
     instance_type = "t2.nano"
     vpc_security_group_ids = [ "${aws_security_group.allow_ssh.id}" ]
     subnet_id = "${aws_subnet.publicSubnet-A.id}"
     key_name = "ipraxa"
     tags = {
-        "Name" = "PublicEC2"
+        "Name" = "PublicEC3"
     }
     depends_on = [ "aws_vpc.mainvpc","aws_subnet.publicSubnet-A", "aws_security_group.allow_ssh" ]
 
     }
 
-resource "aws_instance" "PrivateEC2" {
+resource "aws_instance" "PrivateEC3" {
     ami = "${var.ami}"
     instance_type = "t2.nano"
     vpc_security_group_ids = [ "${aws_security_group.allow_ssh.id}" ]
     subnet_id = "${aws_subnet.privateSubnet-A.id}"
     key_name = "ipraxa"
     tags = {
-        "Name" = "PrivateEC2"
+        "Name" = "PrivateEC3"
     }
     depends_on = [ "aws_vpc.mainvpc","aws_subnet.privateSubnet-A", "aws_security_group.allow_ssh" ]
 }
